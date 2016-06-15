@@ -15,8 +15,8 @@ public class PhotoDetails extends Activity {
         setContentView(R.layout.activity_photo_details);
 
         Bundle extras=getIntent().getExtras();
-        String[] timeslots=extras.getString("timeslots").split("#");
-        Toast.makeText(getApplicationContext(), timeslots[0], Toast.LENGTH_LONG).show();
+        String[] timeslots=extras.getString("intentKey").split("#");
+
 
 
         for(int i=0;i<timeslots.length;i++)
@@ -26,7 +26,7 @@ public class PhotoDetails extends Activity {
                     .resizeDimen(R.dimen.activity_vertical_widthh, R.dimen.activity_vertical_heightt)
                     .fetch();
 
-           // Toast.makeText(getApplicationContext(),items[i],Toast.LENGTH_LONG).show();
+
         }
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);

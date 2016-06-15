@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements FlingCardListener
     String[] items;
     int counter;
 
+// Api Complete URL = http://www.json-generator.com/api/json/get/bHYevTXZpe?indent=2
     public static final String ROOT_URL = "http://www.json-generator.com/";
 
     private List<PicturesData> pics;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements FlingCardListener
 
         flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
 
-        getBooks();
+        getData();
         al = new ArrayList<>();
         al.add(new Data("http://i.ytimg.com/vi/PnxsTxV8y3g/maxresdefault.jpg", "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness."));
         myAppAdapter = new MyAppAdapter(al, MainActivity.this);
@@ -110,11 +111,10 @@ public class MainActivity extends AppCompatActivity implements FlingCardListener
 
                 View view = flingContainer.getSelectedView();
                 view.findViewById(R.id.background).setAlpha(0);
-                Toast.makeText(getApplicationContext(), "This Item was clicked"+ itemPosition, Toast.LENGTH_LONG).show();
                 String upics=mPicData.get(counter).getLink1() + "#" + mPicData.get(counter).getLink2() + "#"+
                 mPicData.get(counter).getLink3() + "#" + mPicData.get(counter).getLink4();
                 Intent intent = new Intent(MainActivity.this,PhotoDetails.class);
-                intent.putExtra("timeslots",upics);
+                intent.putExtra("intentKey",upics);
 
                 startActivity(intent);
 
@@ -133,12 +133,12 @@ public class MainActivity extends AppCompatActivity implements FlingCardListener
                     .resizeDimen(R.dimen.activity_vertical_width, R.dimen.activity_vertical_height)
                     .fetch();
 
-Toast.makeText(getApplicationContext(),items[i],Toast.LENGTH_LONG).show();
+
         }
     }
 
 
-    private void getBooks(){
+    private void getData(){
         //While the app fetched data we are displaying a progress dialog
         final ProgressDialog loading = ProgressDialog.show(this,"Fetching Data","Please wait...",false,false);
 
@@ -189,7 +189,7 @@ Toast.makeText(getApplicationContext(),items[i],Toast.LENGTH_LONG).show();
             item.setLink4(pics.get(i).getLink4());
             items[i] = pics.get(i).getLink4();
             mPicData.add(item);
-            //Toast.makeText(getApplicationContext(),items[i],Toast.LENGTH_LONG).show();
+
 
         }
         myAppAdapter = new MyAppAdapter(al, MainActivity.this);
